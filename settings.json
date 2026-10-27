@@ -1,0 +1,7 @@
+{
+    "livePreview.defaultPreviewPath": "/CSSfolder/HTMLCODE.html",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\opencv\\build\\java\\opencv-4120.jar"
+    ]
+}
