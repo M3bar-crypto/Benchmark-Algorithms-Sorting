@@ -30,19 +30,19 @@ public class DataStru2_HomeWork_1 {
         long start1 = System.nanoTime();
         mergeSort(arrRandom, 0, n - 1);
         long end1 = System.nanoTime();
-        double timeRandom = (end1 - start1) / 1000.0;
+        double timeRandom = (end1 - start1) / 1_000_000.0;
 
         int[] arrReverse = originalReverse.clone();
         long start2 = System.nanoTime();
         mergeSort(arrReverse, 0, n - 1);
         long end2 = System.nanoTime();
-        double timeReverse = (end2 - start2) / 1000.0;
+        double timeReverse = (end2 - start2) / 1_000_000.0;
 
         int[] arrFully = originalFully.clone();
         long start3 = System.nanoTime();
         mergeSort(arrFully, 0, n - 1);
         long end3 = System.nanoTime();
-        double timeFully = (end3 - start3) / 1000.0;
+        double timeFully = (end3 - start3) / 1_000_000.0;
 
         System.out.println("\n+---------------+--------------------+--------------------+--------------------+");
         System.out.printf("| %-13s | %-18s | %-18s | %-18s |\n", "Algorithm", "Random", "Reversely Sorted", "Fully Sorted");
