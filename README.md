@@ -1,7 +1,7 @@
 # Benchmark-Algorithms-Sorting
 
-Name : Mustafa Osama Mustafa Ali 
-id : 3167104
+Name : Mustafa Osama Mustafa Ali - 
+id : 3167104 - 
 Groub : B 
 
 The developed program creates a comprehensive performance benchmark to evaluate and compare five fundamental sorting algorithms (Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, and Merge Sort) using a large array containing 100,000 elements. 
