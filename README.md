@@ -1,49 +1,45 @@
 # Benchmark-Algorithms-Sorting
 
-الاسم : مصطفى اسامة مصطفى علي / رقم القيد : 3167104 / الشعبة : B
+Name : Mustafa Osama Mustafa Ali 
+id : 3167104
+Groub : B 
 
- جدول مقارنة ازمنة التنفيذ بين حالات ترتيب مختلفة ( عشوائية , معكوسة , مرتبة تصاعديا ) :  
-<img alt="image" src="https://github.com/user-attachments/assets/059f1784-4d6b-4608-8b0f-ddfde100b6e4" />
+The developed program creates a comprehensive performance benchmark to evaluate and compare five fundamental sorting algorithms (Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, and Merge Sort) using a large array containing 100,000 elements. 
+The code structure is based on the following components :
+____________________________
+Data Generation: Four versions of the arrays are created, representing four distinct data scenarios, to test the robustness and speed of each algorithm under various conditions:
 
+Random: Contains entirely random numbers.
 
+Reversely Sorted: Elements are arranged in descending order (from largest to smallest).
 
-رسم بياني توضيحي للمقارنة بين الاداء بين في الحالات المختلفة : 
-<img alt="image" src="https://github.com/user-attachments/assets/cc9ce5ae-f9ff-478b-9094-27a8fb224978" />
+Partially Sorted: Approximately 80% of the elements are sorted, with some scattered random elements.
 
+Fully Sorted: Elements are arranged in ascending order (from smallest to largest).
 
-ملاحظات عامة حول أداء البرنامج وتفسير القياسات (General Notes & Benchmark Observations)
+Timing: The code utilizes the system’s high-precision timer, `System.nanoTime()`, both before and after the execution of each algorithm.
+The result is then converted into milliseconds (ms) to ensure measurement accuracy.
 
-أثناء تشغيل البرنامج واختبار أداء خوارزمية Merge Sort على مصفوفات تحتوي على 100,000 عنصر لعدة مرات متتالية، تم رصد ملاحظتين رئيسيتين تتعلقان بزمن التنفيذ والسلوك البرمجي :
-الملاحظة الأولى : وجود تباين طفيف في أوقات التنفيذ بين كل تشغيل وأخر (Run-to-Run Variance)
-كما يظهر في الصورتين المرفقتين :
+Execution Management and Output Formatting: The arrays are passed through a central function (`executeAlg`) to run the required algorithm. The results are subsequently printed in a precisely formatted table that adheres to the specified requirements.
+____________________________
+Program Readings : 
+<img alt="image" src="https://github.com/user-attachments/assets/7ecd64db-9caa-47b5-9214-6f8e3da9b0d1" />
 
-<img alt="image" src="https://github.com/user-attachments/assets/8c0d33e3-0ae4-411f-937a-409a7082c9c6" />
-<img alt="image" src="https://github.com/user-attachments/assets/f3383d82-2de2-40ee-82d4-d840fd5914e1" />
+Illustrative graph :
+<img alt="image" src="https://github.com/user-attachments/assets/24e34652-ddc2-48e8-9123-967b46324a23" />
 
-التفسير العلمي والفني :
-يُعدّ التغير الطفيف في الأرقام وقياسات الزمن (بالملي ثانية) عند إعادة تشغيل البرنامج أمراً طبيعياً ومتوقعاً في بيئات التشغيل الحقيقية ، ويرجع ذلك إلى العوامل التقنية التالية :
-
-العمليات الخلفية لنظام التشغيل (OS Background Processes): لا يخصص نظام التشغيل (مثل Windows) كامل موارد المعالج والذاكرة للبرنامج بشكل حصري ؛ حيث تعمل برامج وخدمات متعددة في الخلفية، مما يؤدي إلى تذبذب غير مباشر في سرعة المعالجة المتاحة .
-
-التردد الديناميكي للمعالج (CPU Dynamic Frequency & Turbo Boost): تقوم المعالجات الحديثة بتعديل ترددها وسرعة تنفيذها ديناميكياً بناءً على الحمل الحراري واستهلاك الطاقة لحظة تنفيذ الكود .
-
-سلوك الذاكرة المؤقتة (CPU Caches): تتأثر معدلات الوصول للذاكرة العشوائية (RAM) وسرعة استرجاع البيانات من الذاكرة المؤقتة للمعالج بحالة النظام العامة أثناء لحظة التنفيذ .
-
-تغير مدخلات التوليد العشوائي: تجربة البيانات غير المرتبة (Random) تعتمد على توليد أرقام مختلفة في كل تشغيل، مما يسبب اختلافاً يسير في مسار المقارنات الداخلية .
-
-
-
-
-الملاحظة الثانية: تقارب وتقلب الأداء بين المصفوفة المرتبة تماماً (Fully Sorted) والمصفوفة المرتبة عكسياً (Reversely Sorted)
-التفسير العلمي والفني :
-من الناحية النظرية والتحليلية، فإن التعقيد الزمني لخوارزمية Merge Sort هو $\Theta(N \log N)$ في جميع الحالات (الأفضل، المتوسطة، والأسوأ). الخوارزمية لا تتأثر بالترتيب الأولي للبيانات لأنها تقوم بالتقسيم والدمج بشكل منتظم وثابت بغض النظر عن حالة العناصر. أما التفاوت اللحظي البسيط (حيث تظهر إحدى الحالتين أسرع بفارق أجزاء من الملي ثانية عن الأخرى في تشغيل معين ثم ينعكس الأمر في التشغيل التالي)، فيرجع إلى:
-
-تأثير المترجم اللحظي لبيئة الجافا (JIT Compiler & JVM Warm-up): تعتمد بيئة Java على تقنية التجميع اللحظي؛ حيث تتطلب الشوط الأول من الاختبارات وقتاً إضافياً صغيراً للتهيئة والتحسين البرمجي (Warm-up)، مما قد يجعل الترتيب التسلسلي لاستدعاء الدوال في الكود مؤثراً طفيفاً على زمن التنفيذ.
-
-جامع النفايات وإدارة الذاكرة (Garbage Collector - GC): تقوم دالة الدمج (merge) بحجز مصفوفات فرعية مؤقتة (L و R) ملايين المرات. وقد يؤدي أي تدخل لحظي غير متزامن من آلية تنظيف الذاكرة في Java إلى إضافة تأخير بسيط جداً أثناء تنفيذ إحدى الحالات.
-
-جدولة المعالج (CPU Scheduling): تفاوت استجابة النوى داخل المعالج نتيجة للضوضاء الإلكترونية وجدولة المهام من قبل نظام التشغيل.
+Questions that have been noted?
+Question: Why is Bubble Sort considered the fastest when an array is already fully sorted, yet the slowest in other scenarios?
+Answer: At its core, the Bubble Sort algorithm relies on comparing adjacent elements and swapping their positions. 
+Algorithmic and mathematical analysis explains the sharp contrast in its performance as follows:
+Why it is the fastest when an array is fully sorted: 
+Thanks to an optimization—a boolean flag (often called `swapped`)—the algorithm begins its first pass, comparing elements without needing to perform any swaps. Consequently, the `swapped` variable remains `false`, triggering an immediate exit from the loop after just one pass ($n-1$ comparisons).
+This optimization reduces the actual time complexity in this specific case to (O(n)) (linear complexity), allowing it to finish in a fraction of a millisecond—outpacing even more advanced algorithms during that single pass.
+Why it is the slowest in other scenarios (such as random or reverse-ordered data):
+When data is random or in reverse order, the algorithm loses this advantage and must execute its full cycle using nested loops, which increases the time complexity to (O(n^2)) (quadratic complexity).
+With a large dataset—for instance, 100,000 elements—an (O(n^2)) complexity results in millions of comparisons and swaps, which is extremely time-consuming. This places it at the bottom of the ranking, making it significantly slower than advanced, divide-and-conquer-based algorithms such as Merge Sort and Quick Sort 
+(O(n \log n)).
 
 
-الخلاصة ;
-هذه الفروقات الزمانية الضئيلة تُصنّف علمياً ضمن "الضوضاء البرمجية البيئية" (Environment Noise)، وتُثبت جدارة واستقرار خوارزمية Merge Sort وثبات تعقيدها الزمني بغض النظر عن طبيعة البيانات المدخلة.
+
+
