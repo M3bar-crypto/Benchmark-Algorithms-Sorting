@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class DataStru2_HomeWork_1 {
-    
 
     public static void main(String[] args) {
         
@@ -12,45 +11,147 @@ public class DataStru2_HomeWork_1 {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
-        System.out.println("=== Merge Sort Performance Benchmark (100,000 Elements) ===");
+        System.out.println("=== Sorting Algorithms Performance Benchmark (100,000 Elements) ===");
         System.out.println("Press Enter to start running the benchmarks ...");
         scanner.nextLine();
 
         int[] originalRandom = new int[n];
         int[] originalReverse = new int[n];
+        int[] originalPartially = new int[n];
         int[] originalFully = new int[n];
 
         for (int i = 0; i < n; i++) {
             originalRandom[i] = random.nextInt();
             originalReverse[i] = n - i;
             originalFully[i] = i + 1;
+            
+            if (i < (int)(n * 0.8)) {
+                originalPartially[i] = i + 1;
+            } else {
+                originalPartially[i] = random.nextInt();
+            }
         }
 
-        int[] arrRandom = originalRandom.clone();
-        long start1 = System.nanoTime();
-        mergeSort(arrRandom, 0, n - 1);
-        long end1 = System.nanoTime();
-        double timeRandom = (end1 - start1) / 1_000_000.0;
+        System.out.println("+---------------+--------------------+--------------------+--------------------+--------------------+");
+        System.out.printf("| %-13s | %-18s | %-18s | %-18s | %-18s |\n", "Algorithm", "Random", "Reversely Sorted", "Partially Sorted", "Fully Sorted");
+        System.out.println("+---------------+--------------------+--------------------+--------------------+--------------------+");
 
-        int[] arrReverse = originalReverse.clone();
-        long start2 = System.nanoTime();
-        mergeSort(arrReverse, 0, n - 1);
-        long end2 = System.nanoTime();
-        double timeReverse = (end2 - start2) / 1_000_000.0;
+        runBenchmark("Selection Sort", originalRandom, originalReverse, originalPartially, originalFully, n, 1);
 
-        int[] arrFully = originalFully.clone();
-        long start3 = System.nanoTime();
-        mergeSort(arrFully, 0, n - 1);
-        long end3 = System.nanoTime();
-        double timeFully = (end3 - start3) / 1_000_000.0;
+        runBenchmark("Insertion Sort", originalRandom, originalReverse, originalPartially, originalFully, n, 2);
 
-        System.out.println("\n+---------------+--------------------+--------------------+--------------------+");
-        System.out.printf("| %-13s | %-18s | %-18s | %-18s |\n", "Algorithm", "Random", "Reversely Sorted", "Fully Sorted");
-        System.out.println("+---------------+--------------------+--------------------+--------------------+");
-        System.out.printf("| %-13s | %-11.3f ms | %-11.3f ms | %-11.3f ms |\n", "Merge Sort", timeRandom, timeReverse, timeFully);
-        System.out.println("+---------------+--------------------+--------------------+--------------------+");
+        runBenchmark("Bubble Sort", originalRandom, originalReverse, originalPartially, originalFully, n, 3);
+
+        runBenchmark("Quick Sort", originalRandom, originalReverse, originalPartially, originalFully, n, 4);
+
+        runBenchmark("Merge Sort", originalRandom, originalReverse, originalPartially, originalFully, n, 5);
+
+        System.out.println("+---------------+--------------------+--------------------+--------------------+--------------------+");
 
         scanner.close();
+    }
+
+    public static void runBenchmark(String name, int[] rand, int[] rev, int[] part, int[] full, int n, int algType) {
+        double timeRandom = executeAlg(rand.clone(), n, algType);
+        double timeReverse = executeAlg(rev.clone(), n, algType);
+        double timePartially = executeAlg(part.clone(), n, algType);
+        double timeFully = executeAlg(full.clone(), n, algType);
+
+        System.out.printf("| %-13s | %-8.3f   ms | %-8.3f   ms | %-8.3f   ms | %-8.3f   ms |\n", 
+                          name, timeRandom, timeReverse, timePartially, timeFully);
+    }
+
+    public static double executeAlg(int[] arr, int n, int algType) {
+        long start = System.nanoTime();
+        switch (algType) {
+            case 1: selectionSort(arr); break;
+            case 2: insertionSort(arr); break;
+            case 3: bubbleSort(arr); break;
+            case 4: quickSort(arr, 0, n - 1); break;
+            case 5: mergeSort(arr, 0, n - 1); break;
+        }
+        long end = System.nanoTime();
+        return (end - start) / 1_000_000.0;
+        
+    }
+
+    public static void selectionSort(int[] a) {
+        int n = a.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (a[j] < a[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            int temp = a[minIdx];
+            a[minIdx] = a[i];
+            a[i] = temp;
+        }
+    }
+
+    public static void insertionSort(int[] a) {
+        int n = a.length;
+        for (int i = 1; i < n; i++) {
+            int key = a[i];
+            int j = i - 1;
+            while (j >= 0 && a[j] > key) {
+                a[j + 1] = a[j];
+                j--;
+            }
+            a[j + 1] = key;
+        }
+    }
+
+    public static void bubbleSort(int[] a) {
+        int n = a.length;
+        boolean swapped;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (a[j] > a[j + 1]) {
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+        }
+    }
+
+    public static void quickSort(int[] a, int low, int high) {
+        if (low < high) {
+            int pi = randomizedPartition(a, low, high);
+            quickSort(a, low, pi - 1);
+            quickSort(a, pi + 1, high);
+        }
+    }
+
+    private static int randomizedPartition(int[] a, int low, int high) {
+        Random rand = new Random();
+        int pivotIndex = low + rand.nextInt(high - low + 1);
+        int temp = a[pivotIndex];
+        a[pivotIndex] = a[high];
+        a[high] = temp;
+        return partition(a, low, high);
+    }
+
+    private static int partition(int[] a, int low, int high) {
+        int pivot = a[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (a[j] <= pivot) {
+                i++;
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+        int temp = a[i + 1];
+        a[i + 1] = a[high];
+        a[high] = temp;
+        return i + 1;
     }
 
     public static void mergeSort(int[] a, int l, int r) {
