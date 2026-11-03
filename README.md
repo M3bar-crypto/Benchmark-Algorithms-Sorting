@@ -28,18 +28,32 @@ Program Readings :
 Illustrative graph :
 <img alt="image" src="https://github.com/user-attachments/assets/24e34652-ddc2-48e8-9123-967b46324a23" />
 
-Questions that have been noted?
-Question: Why is Bubble Sort considered the fastest when an array is already fully sorted, yet the slowest in other scenarios?
-Answer: At its core, the Bubble Sort algorithm relies on comparing adjacent elements and swapping their positions. 
+Questions that have been noted? 
+
+Question: Why is Bubble Sort considered the fastest when an array is already fully sorted, 
+yet the slowest in other scenarios?
+
+Answer: At its core, the Bubble Sort algorithm relies on comparing adjacent elements and swapping their positions.
 Algorithmic and mathematical analysis explains the sharp contrast in its performance as follows:
 Why it is the fastest when an array is fully sorted: 
-Thanks to an optimization—a boolean flag (often called `swapped`)—the algorithm begins its first pass, comparing elements without needing to perform any swaps. Consequently, the `swapped` variable remains `false`, triggering an immediate exit from the loop after just one pass ($n-1$ comparisons).
-This optimization reduces the actual time complexity in this specific case to (O(n)) (linear complexity), allowing it to finish in a fraction of a millisecond—outpacing even more advanced algorithms during that single pass.
+
+Thanks to an optimization—a boolean flag (often called swapped)—the algorithm begins its first pass, 
+comparing elements without needing to perform any swaps.
+
+Consequently, the swapped variable remains false,
+triggering an immediate exit from the loop after just one pass ((n - 1) comparisons).
+
+This optimization reduces the actual time complexity in this specific case to $O(n)$ (linear complexity), allowing it to finish in a fraction of a millisecond—outpacing even more advanced algorithms during that single pass.
+
+___________________________
+
 Why it is the slowest in other scenarios (such as random or reverse-ordered data):
-When data is random or in reverse order, the algorithm loses this advantage and must execute its full cycle using nested loops, which increases the time complexity to (O(n^2)) (quadratic complexity).
-With a large dataset—for instance, 100,000 elements—an (O(n^2)) complexity results in millions of comparisons and swaps, which is extremely time-consuming. This places it at the bottom of the ranking, making it significantly slower than advanced, divide-and-conquer-based algorithms such as Merge Sort and Quick Sort 
+
+When data is random or in reverse order, the algorithm loses this advantage and must execute its full cycle using nested loops, 
+which increases the time complexity to (O(n^2)) (quadratic complexity).
+
+With a large dataset—for instance, 100,000 elements—an (O(n^2)) complexity results in millions of comparisons and swaps,
+which is extremely time-consuming.
+
+This places it at the bottom of the ranking, making it significantly slower than advanced, divide-and-conquer-based algorithms such as Merge Sort and Quick Sort 
 (O(n \log n)).
-
-
-
-
