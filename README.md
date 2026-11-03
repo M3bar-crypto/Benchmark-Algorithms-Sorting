@@ -9,23 +9,25 @@ The code structure is based on the following components :
 ____________________________
 Data Generation: Four versions of the arrays are created, representing four distinct data scenarios, to test the robustness and speed of each algorithm under various conditions:
 
-Random: Contains entirely random numbers.
+--Random-- : Contains entirely random numbers.
 
-Reversely Sorted: Elements are arranged in descending order (from largest to smallest).
+--Reversely Sorted-- : Elements are arranged in descending order (from largest to smallest).
 
-Partially Sorted: Approximately 80% of the elements are sorted, with some scattered random elements.
+--Partially Sorted-- : Approximately 80% of the elements are sorted, with some scattered random elements.
 
-Fully Sorted: Elements are arranged in ascending order (from smallest to largest).
+--Fully Sorted-- : Elements are arranged in ascending order (from smallest to largest).
 
 Timing: The code utilizes the system’s high-precision timer, `System.nanoTime()`, both before and after the execution of each algorithm.
 The result is then converted into milliseconds (ms) to ensure measurement accuracy.
 
 Execution Management and Output Formatting: The arrays are passed through a central function (`executeAlg`) to run the required algorithm. The results are subsequently printed in a precisely formatted table that adheres to the specified requirements.
 ____________________________
-Program Readings : 
+Program Readings :
+
 <img alt="image" src="https://github.com/user-attachments/assets/7ecd64db-9caa-47b5-9214-6f8e3da9b0d1" />
 
 Illustrative graph :
+
 <img alt="image" src="https://github.com/user-attachments/assets/24e34652-ddc2-48e8-9123-967b46324a23" />
 
 Questions that have been noted? 
